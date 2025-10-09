@@ -69,6 +69,15 @@
       keyCombo.shift=keyCombo.g=false;
     }
   });
+
+  // Validate secret header
+const SECRET = 'ishtyaq-chat-42';
+const headers = items[0].json.headers || {};
+if(headers['x-secret'] !== SECRET){
+  throw new Error('Unauthorized'); // stops the flow
+}
+return items;
+
   document.addEventListener('keyup',(e)=>{ if(e.key==='Shift') keyCombo.shift=false; if(e.key.toLowerCase()==='g') keyCombo.g=false; });
   send.onclick=async()=>{
     const msg=input.value.trim(); if(!msg) return;
@@ -828,4 +837,5 @@
   </body>
 
 </html>
+
 
