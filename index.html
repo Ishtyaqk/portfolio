@@ -45,6 +45,42 @@
     <!-- Custom Browser Color End -->
   </head>
 
+  <!-- Easter Egg Chat -->
+<div id="isht-chat" style="display:none;position:fixed;bottom:20px;right:20px;width:320px;height:420px;background:#111;color:#eee;border-radius:12px;padding:10px;box-shadow:0 0 15px rgba(0,0,0,0.3);font-family:monospace;z-index:9999;">
+  <div id="chat-log" style="height:340px;overflow:auto;font-size:13px;margin-bottom:6px;"></div>
+  <textarea id="chat-input" placeholder="Ask me something..." style="width:100%;height:50px;background:#222;color:#eee;border:none;border-radius:8px;padding:6px;"></textarea>
+  <button id="chat-send" style="width:100%;margin-top:6px;background:#444;color:#eee;border:none;padding:6px;border-radius:8px;">Send</button>
+</div>
+<script>
+(function(){
+  const keyCombo = {shift:false,g:false};
+  const box=document.getElementById('isht-chat');
+  const log=document.getElementById('chat-log');
+  const input=document.getElementById('chat-input');
+  const send=document.getElementById('chat-send');
+  const WEBHOOK='http://localhost:5678/webhook/isht-chat';
+  const SECRET='ishtyaq-chat-42';
+
+  document.addEventListener('keydown',(e)=>{
+    if(e.key==='Shift') keyCombo.shift=true;
+    if(e.key.toLowerCase()==='g') keyCombo.g=true;
+    if(keyCombo.shift && keyCombo.g){
+      box.style.display=box.style.display==='none'?'block':'none';
+      keyCombo.shift=keyCombo.g=false;
+    }
+  });
+  document.addEventListener('keyup',(e)=>{ if(e.key==='Shift') keyCombo.shift=false; if(e.key.toLowerCase()==='g') keyCombo.g=false; });
+  send.onclick=async()=>{
+    const msg=input.value.trim(); if(!msg) return;
+    append('you: '+msg); input.value=''; append('...thinking');
+    const res=await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json','x-secret':SECRET},body:JSON.stringify({message:msg})});
+    const j=await res.json(); removeLast(); append('isht: '+(j.text||'...no reply'));
+  };
+  function append(t){const d=document.createElement('div');d.textContent=t;d.style.margin='4px 0';log.appendChild(d);log.scrollTop=log.scrollHeight;}
+  function removeLast(){const last=log.lastChild;if(last&&last.textContent==='...thinking')log.removeChild(last);}
+})();
+</script>
+
   <body>
 
     <!-- Loader Start -->
@@ -792,3 +828,4 @@
   </body>
 
 </html>
+
