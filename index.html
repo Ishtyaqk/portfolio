@@ -844,7 +844,8 @@
       #chat-widget-container {
         position: fixed;
         bottom: 30px;
-        right: 30px;
+        left: 50%;
+        transform: translateX(-50%);
         z-index: 10000;
         font-family: 'Poppins', sans-serif;
       }
@@ -905,7 +906,8 @@
       .chat-window {
         position: absolute;
         bottom: 80px;
-        right: 0;
+        left: 50%;
+        transform: translateX(-50%);
         width: 350px;
         height: 500px;
         background: white;
@@ -1132,17 +1134,19 @@
       }
 
       /* Mobile Responsiveness */
-      @media (max-width: 768px) {
-        #chat-widget-container {
-          bottom: 20px;
-          right: 20px;
-        }
+       @media (max-width: 768px) {
+         #chat-widget-container {
+           bottom: 20px;
+           left: 50%;
+           transform: translateX(-50%);
+         }
 
         .chat-window {
-          width: calc(100vw - 40px);
-          right: -20px;
-          height: 450px;
-        }
+           width: calc(100vw - 40px);
+           left: 50%;
+           transform: translateX(-50%);
+           height: 450px;
+         }
 
         .chat-button {
           padding: 12px 16px;
@@ -1157,8 +1161,8 @@
     <script>
       (function() {
         // Configuration
-        const WEBHOOK_URL = 'http://localhost:5678/webhook/isht-chat';
-        const SECRET_KEY = 'ishtyaq-chat-42';
+        const WEBHOOK_URL = 'https://hook.eu2.make.com/hnxqvvsix4glhmg8ifbbgydwch5g7hag';
+        const SECRET_KEY = 'isht-chat';
         const POPUP_DELAY = 3000; // 3 seconds
 
         // DOM elements
@@ -1184,7 +1188,19 @@
         function showPopup() {
           const popup = document.createElement('div');
           popup.innerHTML = `
-            <div style="position: fixed; bottom: 120px; right: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3); z-index: 10001; font-family: 'Poppins', sans-serif; font-size: 14px; max-width: 250px; animation: slideInRight 0.5s ease-out;">
+            <div style="position: fixed; bottom: 120px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3); z-index: 10001; font-family: 'Poppins', sans-serif; font-size: 14px; max-width: 250px; animation: slideUp 0.5s ease-out;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 8px; height: 8px; background: #4ade80; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                <span style="font-weight: 500;">Need help? I'm here to chat!</span>
+              </div>
+              <div style="margin-top: 8px; font-size: 12px; opacity: 0.9;">Ask me about Ishtyaq's work or projects</div>
+            </div>
+            <style>
+              @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+              }
+            </style> 
               <div style="display: flex; align-items: center; gap: 10px;">
                 <div style="width: 8px; height: 8px; background: #4ade80; border-radius: 50%; animation: pulse 2s infinite;"></div>
                 <span style="font-weight: 500;">Need help? I'm here to chat!</span>
@@ -1361,6 +1377,7 @@
   </body>
 
 </html>
+
 
 
 
