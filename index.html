@@ -790,6 +790,9 @@
     <!-- Load Scripts End -->
 
     <!-- Enhanced Chatbot Widget Start -->
+     <!-- Hover trigger area -->
+    <div class="chat-hover-trigger" id="chat-hover-trigger"></div>
+    
     <div id="chat-widget-container">
       <!-- Chat Button -->
       <div id="chat-button" class="chat-button">
@@ -843,11 +846,29 @@
       /* Chatbot Widget Styles */
       #chat-widget-container {
         position: fixed;
-        bottom: 30px;
+        bottom: -100px;
         left: 50%;
         transform: translateX(-50%);
         z-index: 10000;
         font-family: 'Poppins', sans-serif;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      #chat-widget-container.show {
+        bottom: 30px;
+      }
+
+      /* Hover trigger area */
+      .chat-hover-trigger {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 300px;
+        height: 100px;
+        z-index: 9999;
+        background: transparent;
+        cursor: pointer;
       }
 
       .chat-button {
@@ -1135,6 +1156,11 @@
 
       /* Mobile Responsiveness */
        @media (max-width: 768px) {
+          .chat-hover-trigger {
+           width: 100vw;
+           height: 80px;
+         }
+
          #chat-widget-container {
            bottom: 20px;
            left: 50%;
@@ -1162,10 +1188,12 @@
       (function() {
         // Configuration
         const WEBHOOK_URL = 'https://hook.eu2.make.com/hnxqvvsix4glhmg8ifbbgydwch5g7hag';
-        const SECRET_KEY = 'isht-chat';
-        const POPUP_DELAY = 3000; // 3 seconds
+        const POPUP_DELAY = 6000; // 6 seconds
+        const AUTO_HIDE_DELAY = 10000; // 10 seconds
 
         // DOM elements
+        const chatContainer = document.getElementById('chat-widget-container');
+        const chatHoverTrigger = document.getElementById('chat-hover-trigger');
         const chatButton = document.getElementById('chat-button');
         const chatWindow = document.getElementById('chat-window');
         const chatClose = document.getElementById('chat-close');
@@ -1175,6 +1203,58 @@
 
         let isOpen = false;
         let popupShown = false;
+         let isVisible = false;
+        let autoHideTimer = null;
+        let hoverTimer = null;
+
+        // Show chat button on hover
+        function showChatButton() {
+          if (!isVisible) {
+            isVisible = true;
+            chatContainer.classList.add('show');
+            clearTimeout(autoHideTimer);
+            autoHideTimer = setTimeout(() => {
+              hideChatButton();
+            }, AUTO_HIDE_DELAY);
+          } else {
+            clearTimeout(autoHideTimer);
+            autoHideTimer = setTimeout(() => {
+              hideChatButton();
+            }, AUTO_HIDE_DELAY);
+          }
+        }
+
+        // Hide chat button
+        function hideChatButton() {
+          if (isVisible && !isOpen) {
+            isVisible = false;
+            chatContainer.classList.remove('show');
+          }
+        }
+
+        // Show chat button on hover (desktop)
+        chatHoverTrigger.addEventListener('mouseenter', () => {
+          showChatButton();
+        });
+
+        // Show chat button on touch (mobile)
+        chatHoverTrigger.addEventListener('touchstart', () => {
+          showChatButton();
+        });
+
+        // Keep chat button visible when hovering over it
+        chatContainer.addEventListener('mouseenter', () => {
+          clearTimeout(autoHideTimer);
+        });
+
+        // Start auto-hide timer when leaving chat area
+        chatContainer.addEventListener('mouseleave', () => {
+          if (!isOpen) {
+            autoHideTimer = setTimeout(() => {
+              hideChatButton();
+            }, AUTO_HIDE_DELAY);
+          }
+        });
 
         // Auto-popup after delay
         setTimeout(() => {
@@ -1243,8 +1323,13 @@
           if (isOpen) {
             chatWindow.classList.add('show');
             chatInput.focus();
+            clearTimeout(autoHideTimer); // Prevent auto-hide when chat is open
           } else {
             chatWindow.classList.remove('show');
+            // Start auto-hide timer after closing chat
+            autoHideTimer = setTimeout(() => {
+              hideChatButton();
+            }, AUTO_HIDE_DELAY);
           }
         }
 
@@ -1252,6 +1337,10 @@
         function closeChat() {
           isOpen = false;
           chatWindow.classList.remove('show');
+          // Start auto-hide timer after closing chat
+          autoHideTimer = setTimeout(() => {
+            hideChatButton();
+          }, AUTO_HIDE_DELAY);
         }
 
         // Add message to chat
@@ -1315,8 +1404,7 @@
             const response = await fetch(WEBHOOK_URL, {
               method: 'POST',
               headers: {
-                'Content-Type': 'application/json',
-                'x-secret': SECRET_KEY
+                'Content-Type': 'application/json'
               },
               body: JSON.stringify({ message: message })
             });
@@ -1326,8 +1414,8 @@
             // Remove typing indicator
             removeTypingIndicator();
             
-            // Add bot response
-            addMessage(data.text || 'Sorry, I encountered an error. Please try again.');
+             // Add bot response - Make.com webhook returns data.reply
+            addMessage(data.reply || 'Sorry, I encountered an error. Please try again.');
             
           } catch (error) {
             console.error('Chat error:', error);
@@ -1377,6 +1465,7 @@
   </body>
 
 </html>
+
 
 
 
