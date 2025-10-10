@@ -1389,40 +1389,44 @@
 
         // Send message
         async function sendMessage() {
-          const message = chatInput.value.trim();
-          if (!message) return;
+          const userMessage = chatInput.value.trim();
+          if (!userMessage) return;
 
-          // Add user message
-          addMessage(message, true);
+          // Add user message (correct signature: content, isUser, showTyping)
+          addMessage(userMessage, true);
           chatInput.value = '';
           chatSendBtn.disabled = true;
 
-          // Show typing indicator
+         // Show typing indicator using existing method
           const typingMsg = addMessage('', false, true);
 
           try {
-           const res = await fetch('https://hook.eu2.make.com/hnxqvvsix4glhmg8ifbbgydwch5g7hag', {
-           method: 'POST',
-           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: userMessage })
+            // Option 1: Direct fetch (may have CORS issues)
+            const res = await fetch("https://hook.eu2.make.com/hnxqvvsix4glhmg8ifbbgydwch5g7hag", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ message: userMessage })
          });
-
-            console.log('Response status:', res.status);
-            const text = await res.text();
-            console.log('Raw response:', text);
-
-            const data = JSON.parse(text);
+               / Option 2: CORS proxy (uncomment if direct fetch fails)
+            /*
+            const res = await fetch("https://api.allorigins.win/raw?url=" +
+              encodeURIComponent("https://hook.eu2.make.com/hnxqvvsix4glhmg8ifbbgydwch5g7hag"), {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ message: userMessage })
+            });
+            */
             
             // Remove typing indicator
             removeTypingIndicator();
             
-             // Add bot response - Make.com webhook returns data.reply
-            addMessage(data.reply || 'Sorry, I encountered an error. Please try again.');
+             // Add bot response - adjust based on your webhook response format
+            addMessage(data.reply || data.message || "Sorry, I encountered an error. Please try again.");
             
           } catch (error) {
             console.error('Chat error:', error);
             removeTypingIndicator();
-            addMessage('Sorry, I\'m having trouble connecting. Please try again later.');
+            addMessage("Sorry, I'm having trouble connecting. Please try again later.");
           } finally {
             chatSendBtn.disabled = false;
             chatInput.focus();
@@ -1467,6 +1471,7 @@
   </body>
 
 </html>
+
 
 
 
