@@ -465,13 +465,13 @@
         <p class="pcard-d">Premium B2B brand site for architects & contractors in Kerala.</p>
         <div class="tags"><span class="tag">Next.js</span><span class="tag">Vercel</span></div>
       </a>
-      <div class="pcard" style="cursor:default;">
-        <p class="pcard-t">WhatsApp GST Invoicer</p>
-        <p class="pcard-d">Zero-cost invoice automation for Indian micro-businesses.</p>
-        <div class="tags"><span class="tag">Meta Cloud API</span><span class="tag">Make.com</span></div>
+      <a class="pcard" href="https://automated-invoice-bot.vercel.app/" target="_blank">
+        <p class="pcard-t">Telegram Invoicer</p>
+        <p class="pcard-d">Zero-cost invoice automation for Indian micro-businesses via Telegram.</p>
+        <div class="tags"><span class="tag">Telegram API</span><span class="tag">Make.com</span></div>
         <p class="wip">◆ In Progress</p>
-      </div>
-      <a class="pcard" href="https://ishtyaqk.github.io/portfolio/" target="_blank">
+      </a>
+      <a class="pcard" href="https://careerai-one.vercel.app/" target="_blank">
         <p class="pcard-t">AI Learning Platform</p>
         <p class="pcard-d">Personalised learning platform concept built on Vertex AI.</p>
         <div class="tags"><span class="tag">Vertex AI</span><span class="tag">GCP</span></div>
