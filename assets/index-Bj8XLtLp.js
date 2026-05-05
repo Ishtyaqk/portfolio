@@ -1,4 +1,4 @@
-(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))r(e);new MutationObserver(e=>{for(const s of e)if(s.type==="childList")for(const o of s.addedNodes)o.tagName==="LINK"&&o.rel==="modulepreload"&&r(o)}).observe(document,{childList:!0,subtree:!0});function n(e){const s={};return e.integrity&&(s.integrity=e.integrity),e.referrerPolicy&&(s.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?s.credentials="include":e.crossOrigin==="anonymous"?s.credentials="omit":s.credentials="same-origin",s}function r(e){if(e.ep)return;e.ep=!0;const s=n(e);fetch(e.href,s)}})();document.documentElement.style.cssText="margin:0;padding:0;width:100%;height:100%;";document.body.style.cssText="margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#0c0810;";const h=document.getElementById("root")??document.body;let m=0;const b=6e3,i=document.createElement("div");i.id="scrollContainer";i.style.cssText=["position:fixed;top:0;left:0;width:100%;height:100%;","overflow-y:scroll;z-index:1;","-webkit-overflow-scrolling:touch;","overscroll-behavior:none;"].join("");const u=document.createElement("div");u.style.height=b+"px";i.appendChild(u);h.appendChild(i);i.addEventListener("scroll",()=>{m=Math.min(i.scrollTop/(b-window.innerHeight),1),E(m)});const d=document.createElement("div");d.style.cssText="position:fixed;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;";d.innerHTML=`
+(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const a of document.querySelectorAll('link[rel="modulepreload"]'))r(a);new MutationObserver(a=>{for(const s of a)if(s.type==="childList")for(const o of s.addedNodes)o.tagName==="LINK"&&o.rel==="modulepreload"&&r(o)}).observe(document,{childList:!0,subtree:!0});function n(a){const s={};return a.integrity&&(s.integrity=a.integrity),a.referrerPolicy&&(s.referrerPolicy=a.referrerPolicy),a.crossOrigin==="use-credentials"?s.credentials="include":a.crossOrigin==="anonymous"?s.credentials="omit":s.credentials="same-origin",s}function r(a){if(a.ep)return;a.ep=!0;const s=n(a);fetch(a.href,s)}})();document.documentElement.style.cssText="margin:0;padding:0;width:100%;height:100%;";document.body.style.cssText="margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#0c0810;";const h=document.getElementById("root")??document.body;let m=0;const b=6e3,i=document.createElement("div");i.id="scrollContainer";i.style.cssText=["position:fixed;top:0;left:0;width:100%;height:100%;","overflow-y:scroll;z-index:1;","-webkit-overflow-scrolling:touch;","overscroll-behavior:none;"].join("");const u=document.createElement("div");u.style.height=b+"px";i.appendChild(u);h.appendChild(i);i.addEventListener("scroll",()=>{m=Math.min(i.scrollTop/(b-window.innerHeight),1),A(m)});const d=document.createElement("div");d.style.cssText="position:fixed;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;";d.innerHTML=`
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500&display=swap');
   *, *::before, *::after { box-sizing: border-box; }
@@ -267,6 +267,25 @@
     color: rgba(245,240,232,0.48);
     letter-spacing: 0.1em; text-transform: uppercase;
   }
+  .social-links {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-top: 24px;
+  }
+  .social-link {
+    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+    padding: 7px 16px; border-radius: 2px;
+    color: rgba(245,240,232,0.65);
+    border: 1px solid rgba(245,240,232,0.1);
+    background: rgba(245,240,232,0.03);
+    transition: all 0.2s;
+  }
+  .social-link:hover {
+    border-color: rgba(240,168,50,0.4);
+    color: #f5f0e8;
+    background: rgba(240,168,50,0.06);
+    transform: translateY(-1px);
+  }
 
   /* PROJECTS */
   .pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -408,9 +427,9 @@
   <p class="hero-eyebrow">Portfolio · 2025</p>
   <h1 class="hero-name">Ishtyaq<br>Khan</h1>
   <div class="hero-sub-wrap">
-    <span class="hero-sub on" id="s0">AI Builder</span>
-    <span class="hero-sub dn"  id="s1">GenAI Apps</span>
-    <span class="hero-sub dn"  id="s2">Cloud × Automation</span>
+    <span class="hero-sub on" id="s0">UI/UX Designer</span>
+    <span class="hero-sub dn"  id="s1">Product Design</span>
+    <span class="hero-sub dn"  id="s2">AI-Native Builder</span>
   </div>
   <div class="hero-ctas">
     <a class="btn-p" href="#" onclick="document.getElementById('scrollContainer').scrollTo({top:1200,behavior:'smooth'});return false;">Explore</a>
@@ -428,53 +447,69 @@
 <div class="sec" id="secAbout">
   <div class="card">
     <p class="slabel">About</p>
-    <h2 class="stitle">Builder by nature,<br><em>AI engineer by direction.</em></h2>
+    <h2 class="stitle">Designing with intent,<br><em>building with AI.</em></h2>
     <hr class="divider"/>
-    <p class="about-body">My background spans <strong>product strategy, UI/UX, and growth</strong> across India and Dubai. Now I'm going deep on GenAI — building LLM apps, RAG pipelines, and agentic systems that go beyond notebooks and proofs of concept.<br><br>I bring something most AI engineers don't: I can build the intelligence <strong>and</strong> the experience around it.</p>
+    <p class="about-body">I'm a <strong>UI/UX and Product Designer</strong> based in Bangalore with experience across India and Dubai. I craft interfaces that are thoughtful, purposeful, and grounded in real user needs — from brand identities and app redesigns to full product workflows.<br><br>What sets me apart: I also <strong>build</strong>. I ship AI-powered tools, automate workflows, and understand the technical side well enough to design for it — not just hand off to it.</p>
     <div class="stats-row">
-      <div class="stat"><div class="stat-n">5+</div><div class="stat-l">AI Projects Shipped</div></div>
+      <div class="stat"><div class="stat-n">8+</div><div class="stat-l">Design Projects</div></div>
       <div class="stat"><div class="stat-n">2</div><div class="stat-l">Countries</div></div>
       <div class="stat"><div class="stat-n">MBA</div><div class="stat-l">Product Dev & Design Thinking</div></div>
+    </div>
+    <div class="social-links">
+      <a class="social-link" href="https://www.behance.net/ishtyaqkhan1" target="_blank">Behance</a>
+      <a class="social-link" href="https://www.linkedin.com/in/ishtyaqk/" target="_blank">LinkedIn</a>
+      <a class="social-link" href="https://github.com/Ishtyaqk" target="_blank">GitHub</a>
+      <a class="social-link" href="mailto:ishtyaq15@gmail.com">Email</a>
     </div>
   </div>
 </div>
 
 <!-- PROJECTS -->
 <div class="sec" id="secProjects">
-  <div class="card" style="width:min(820px,92vw);">
+  <div class="card" style="width:min(860px,92vw);">
     <p class="slabel">Selected Work</p>
     <h2 class="stitle">Projects</h2>
     <div class="pgrid">
-      <a class="pcard" href="https://v0-critique-genius.vercel.app/" target="_blank">
-        <p class="pcard-t">Critique Genius</p>
-        <p class="pcard-d">AI feedback tool with prompt engineering and retrieval flow.</p>
-        <div class="tags"><span class="tag">LLM</span><span class="tag">v0.dev</span><span class="tag">Vercel</span></div>
+      <a class="pcard" href="https://www.behance.net/gallery/227526373/Rang-Kaarwan-Redesign" target="_blank">
+        <p class="pcard-t">Rang Kaarwan Redesign</p>
+        <p class="pcard-d">Full UX redesign of a creative arts platform — improved navigation, hierarchy, and visual language.</p>
+        <div class="tags"><span class="tag">UI/UX</span><span class="tag">Figma</span><span class="tag">Redesign</span></div>
       </a>
-      <a class="pcard" href="https://nextgen-two-eta.vercel.app/" target="_blank">
-        <p class="pcard-t">NextGen</p>
-        <p class="pcard-d">Text-to-speech, podcast generation and voice transcription.</p>
-        <div class="tags"><span class="tag">Voice AI</span><span class="tag">Vercel</span></div>
+      <a class="pcard" href="https://www.behance.net/gallery/227082789/Wrinkle-Rescue" target="_blank">
+        <p class="pcard-t">Wrinkle Rescue</p>
+        <p class="pcard-d">Brand and product design for a skincare concept — visual identity, packaging direction, and UI.</p>
+        <div class="tags"><span class="tag">Branding</span><span class="tag">Product Design</span></div>
       </a>
-      <a class="pcard" href="https://gym-pilot.vercel.app/" target="_blank">
-        <p class="pcard-t">Gym Pilot</p>
-        <p class="pcard-d">AI fitness planner generating personalised workouts from goals.</p>
-        <div class="tags"><span class="tag">GenAI</span><span class="tag">Vercel</span></div>
+      <a class="pcard" href="https://www.behance.net/gallery/207820071/Redefined-tool-for-Invoicing" target="_blank">
+        <p class="pcard-t">Invoicing Tool Redesign</p>
+        <p class="pcard-d">Reimagined invoicing UX for small businesses — simplified flows and a cleaner dashboard.</p>
+        <div class="tags"><span class="tag">UI/UX</span><span class="tag">Dashboard</span><span class="tag">Figma</span></div>
       </a>
       <a class="pcard" href="https://rk-glass.vercel.app/" target="_blank">
         <p class="pcard-t">RK Glass & Hardware</p>
-        <p class="pcard-d">Premium B2B brand site for architects & contractors in Kerala.</p>
-        <div class="tags"><span class="tag">Next.js</span><span class="tag">Vercel</span></div>
+        <p class="pcard-d">Premium B2B brand site for architects & contractors in Kerala — dark luxury aesthetic.</p>
+        <div class="tags"><span class="tag">Web Design</span><span class="tag">Next.js</span><span class="tag">Vercel</span></div>
+      </a>
+      <a class="pcard" href="https://v0-critique-genius.vercel.app/" target="_blank">
+        <p class="pcard-t">Critique Genius</p>
+        <p class="pcard-d">AI feedback tool — designed the UX flow and built it with prompt engineering.</p>
+        <div class="tags"><span class="tag">AI Product</span><span class="tag">UX</span><span class="tag">LLM</span></div>
+      </a>
+      <a class="pcard" href="https://careerai-one.vercel.app/" target="_blank">
+        <p class="pcard-t">AI Learning Platform</p>
+        <p class="pcard-d">Personalised learning platform concept — product design and frontend built on Vertex AI.</p>
+        <div class="tags"><span class="tag">Product Design</span><span class="tag">Vertex AI</span></div>
+      </a>
+      <a class="pcard" href="https://nextgen-two-eta.vercel.app/" target="_blank">
+        <p class="pcard-t">NextGen</p>
+        <p class="pcard-d">Text-to-speech, podcast generation and voice transcription app.</p>
+        <div class="tags"><span class="tag">Voice AI</span><span class="tag">Vercel</span></div>
       </a>
       <a class="pcard" href="https://automated-invoice-bot.vercel.app/" target="_blank">
         <p class="pcard-t">Telegram Invoicer</p>
         <p class="pcard-d">Zero-cost invoice automation for Indian micro-businesses via Telegram.</p>
         <div class="tags"><span class="tag">Telegram API</span><span class="tag">Make.com</span></div>
         <p class="wip">◆ In Progress</p>
-      </a>
-      <a class="pcard" href="https://careerai-one.vercel.app/" target="_blank">
-        <p class="pcard-t">AI Learning Platform</p>
-        <p class="pcard-d">Personalised learning platform concept built on Vertex AI.</p>
-        <div class="tags"><span class="tag">Vertex AI</span><span class="tag">GCP</span></div>
       </a>
     </div>
   </div>
@@ -484,36 +519,37 @@
 <div class="sec" id="secSkills">
   <div class="card">
     <p class="slabel">Capabilities</p>
-    <h2 class="stitle">Tech Stack</h2>
+    <h2 class="stitle">Skills & Tools</h2>
     <hr class="divider"/>
     <div class="skill-groups">
       <div>
-        <p class="sgt">AI / LLM</p>
+        <p class="sgt">Design</p>
         <div class="sbadges">
-          <span class="sbadge">LangChain</span><span class="sbadge">LangGraph</span>
-          <span class="sbadge">OpenAI API</span><span class="sbadge">Vertex AI</span>
-          <span class="sbadge">RAG Pipelines</span><span class="sbadge">Prompt Engineering</span>
+          <span class="sbadge">Figma</span><span class="sbadge">UI/UX Design</span>
+          <span class="sbadge">Visual Design</span><span class="sbadge">Prototyping</span>
+          <span class="sbadge">Design Systems</span><span class="sbadge">User Research</span>
         </div>
       </div>
       <div>
-        <p class="sgt">Cloud & Infra</p>
+        <p class="sgt">Product</p>
         <div class="sbadges">
-          <span class="sbadge">AWS</span><span class="sbadge">Azure</span>
-          <span class="sbadge">GCP</span><span class="sbadge">Vercel</span><span class="sbadge">Docker</span>
+          <span class="sbadge">PRDs</span><span class="sbadge">GTM Strategy</span>
+          <span class="sbadge">Product Roadmaps</span><span class="sbadge">Growth</span>
         </div>
       </div>
       <div>
-        <p class="sgt">Automation & Build</p>
+        <p class="sgt">AI & Build</p>
         <div class="sbadges">
+          <span class="sbadge">LangChain</span><span class="sbadge">OpenAI API</span>
+          <span class="sbadge">Vertex AI</span><span class="sbadge">RAG Pipelines</span>
+          <span class="sbadge">Prompt Engineering</span>
+        </div>
+      </div>
+      <div>
+        <p class="sgt">Cloud & Automation</p>
+        <div class="sbadges">
+          <span class="sbadge">AWS</span><span class="sbadge">Vercel</span>
           <span class="sbadge">Make.com</span><span class="sbadge">n8n</span>
-          <span class="sbadge">Meta Cloud API</span><span class="sbadge">Bolt.new</span>
-        </div>
-      </div>
-      <div>
-        <p class="sgt">Product & Design</p>
-        <div class="sbadges">
-          <span class="sbadge">Figma</span><span class="sbadge">PRDs</span>
-          <span class="sbadge">GTM Strategy</span><span class="sbadge">UI/UX Design</span>
         </div>
       </div>
     </div>
@@ -570,10 +606,10 @@
     <p class="otw"><span class="dot"></span>Open to opportunities · Bangalore</p>
   </div>
 </div>
-`;h.appendChild(d);const w=document.getElementById("fairyWrap"),I=[[38,8],[42,6],[46,7],[50,5],[54,7],[58,6],[62,8],[36,14],[44,12],[52,11],[60,13],[66,15],[34,10],[48,9],[56,10],[40,16],[53,15],[63,12]];I.forEach(([a,t],n)=>{const r=document.createElement("div");r.className="fairy";const e=4+Math.random()*6;r.style.cssText=`
-    width:${e}px;height:${e}px;
-    left:${a+(Math.random()-.5)*3}%;
+`;h.appendChild(d);const w=document.getElementById("fairyWrap"),I=[[38,8],[42,6],[46,7],[50,5],[54,7],[58,6],[62,8],[36,14],[44,12],[52,11],[60,13],[66,15],[34,10],[48,9],[56,10],[40,16],[53,15],[63,12]];I.forEach(([e,t],n)=>{const r=document.createElement("div");r.className="fairy";const a=4+Math.random()*6;r.style.cssText=`
+    width:${a}px;height:${a}px;
+    left:${e+(Math.random()-.5)*3}%;
     top:${t+(Math.random()-.5)*2}%;
     --dur:${1.8+Math.random()*2}s;
     --delay:${Math.random()*2}s;
-  `,w.appendChild(r)});const k=["AI Builder","GenAI Apps","Cloud × Automation"];let c=0;setInterval(()=>{const a=c;c=(c+1)%k.length;const t=document.getElementById("s"+a),n=document.getElementById("s"+c);!t||!n||(t.className="hero-sub up",n.className="hero-sub dn",requestAnimationFrame(()=>requestAnimationFrame(()=>{n.className="hero-sub on"})))},2800);const A=[{id:"secAbout",s:.13,e:.3,noFadeOut:!1},{id:"secProjects",s:.3,e:.5,noFadeOut:!1},{id:"secSkills",s:.5,e:.66,noFadeOut:!1},{id:"secExp",s:.66,e:.83,noFadeOut:!1},{id:"secContact",s:.83,e:1.01,noFadeOut:!0}];function E(a){const t=document.getElementById("heroContent"),n=document.getElementById("scrollInd"),r=document.getElementById("roomImg");if(t){const e=Math.max(0,1-a*9);t.style.opacity=e,t.style.transform=`translateY(${a*-30}px)`}if(n&&(n.style.opacity=String(Math.max(0,.4-a*7))),r){const e=a*60;r.style.transform=`translate(-50%, calc(-50% - ${e}px))`}A.forEach(({id:e,s,e:o,noFadeOut:x})=>{const l=document.getElementById(e);if(!l)return;let p=0;if(a>=s){const v=Math.min(1,(a-s)/.05),y=x?1:Math.min(1,(o-a)/.05);p=Math.min(v,y)}l.style.opacity=String(p);const g=p>.05,f=l.classList.contains("on");g&&!f?l.classList.add("on"):!g&&f&&l.classList.remove("on")})}
+  `,w.appendChild(r)});const k=["UI/UX Designer","Product Design","AI-Native Builder"];let c=0;setInterval(()=>{const e=c;c=(c+1)%k.length;const t=document.getElementById("s"+e),n=document.getElementById("s"+c);!t||!n||(t.className="hero-sub up",n.className="hero-sub dn",requestAnimationFrame(()=>requestAnimationFrame(()=>{n.className="hero-sub on"})))},2800);const E=[{id:"secAbout",s:.13,e:.3,noFadeOut:!1},{id:"secProjects",s:.3,e:.5,noFadeOut:!1},{id:"secSkills",s:.5,e:.66,noFadeOut:!1},{id:"secExp",s:.66,e:.83,noFadeOut:!1},{id:"secContact",s:.83,e:1.01,noFadeOut:!0}];function A(e){const t=document.getElementById("heroContent"),n=document.getElementById("scrollInd"),r=document.getElementById("roomImg");if(t){const a=Math.max(0,1-e*9);t.style.opacity=a,t.style.transform=`translateY(${e*-30}px)`}if(n&&(n.style.opacity=String(Math.max(0,.4-e*7))),r){const a=e*60;r.style.transform=`translate(-50%, calc(-50% - ${a}px))`}E.forEach(({id:a,s,e:o,noFadeOut:x})=>{const l=document.getElementById(a);if(!l)return;let p=0;if(e>=s){const v=Math.min(1,(e-s)/.05),y=x?1:Math.min(1,(o-e)/.05);p=Math.min(v,y)}l.style.opacity=String(p);const g=p>.05,f=l.classList.contains("on");g&&!f?l.classList.add("on"):!g&&f&&l.classList.remove("on")})}
